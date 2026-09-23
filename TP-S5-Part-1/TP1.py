@@ -63,47 +63,46 @@ X = np.exp(-c_2 / (lbd * T))
 
 Y = np.exp(-c_2 / (lbd * T_0))
 
-plt.plot(X,Y,"+")
-
-
+plt.plot(X, Y, "+")
 
 
 from scipy.stats import linregress
-L =linregress(X,Y)
-A=L[0]
-B=L[1]
-C=L[-2]
-plt.plot(X, A*X+B)
+
+L = linregress(X, Y)
+A = L[0]
+B = L[1]
+C = L[-2]
+plt.plot(X, A * X + B)
 plt.show()
 
-P=R*I*I
+P = R * I * I
 Ln_P = np.log(P)
 Ln_T = np.log(T)
-plt.plot(Ln_T, Ln_P,"+")
-L2 =linregress(Ln_T,Ln_P)
-s=L2[0]
-B2=L2[1]
-C2=L2[-2]
-plt.plot(Ln_T,s*Ln_T+L2[1] )
+plt.plot(Ln_T, Ln_P, "+")
+L2 = linregress(Ln_T, Ln_P)
+s = L2[0]
+B2 = L2[1]
+C2 = L2[-2]
+plt.plot(Ln_T, s * Ln_T + L2[1])
 plt.xlabel("Log(T)")
 plt.ylabel("f(Log(T))")
 plt.show()
 
 
-r_s = P**(1/4)
-plt.plot(r_s, R,"+")
+r_s = P ** (1 / 4)
+plt.plot(r_s, R, "+")
 
-L3 = linregress(r_s, R )
+L3 = linregress(r_s, R)
 alpha_a = L3[0]
 B3 = L3[1]
-Y3 = alpha_a*0.0320e-8 * r_s + B3
+Y3 = alpha_a * 0.0320e-8 * r_s + B3
 plt.plot(r_s, Y3)
 plt.xlabel("Racine s ième de  P")
 plt.ylabel("R")
 plt.show()
 
 P1 = P
-P2 = k * T ** 4
+P2 = k * T**4
 
 print(P1)
 print(P2)
