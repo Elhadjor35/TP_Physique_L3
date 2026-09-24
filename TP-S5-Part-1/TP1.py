@@ -7,6 +7,8 @@ Created on Wed Sep 23 15:13:06 2026
 """
 
 import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import linregress
 
 U = np.array(
     [10.24, 10.79, 11.34, 12.29, 13.33, 14.43, 15.22, 16.24, 17.22, 18.23]
@@ -57,7 +59,6 @@ epsilon_lbd = e_lbd_T_0 / e_lbd_T
 
 epsilon_moy = np.mean(epsilon_lbd)
 
-import matplotlib.pyplot as plt
 
 X = np.exp(-c_2 / (lbd * T))
 
@@ -65,8 +66,6 @@ Y = np.exp(-c_2 / (lbd * T_0))
 
 plt.plot(X, Y, "+")
 
-
-from scipy.stats import linregress
 
 L = linregress(X, Y)
 A = L[0]
@@ -100,9 +99,3 @@ plt.plot(r_s, Y3)
 plt.xlabel("Racine s ième de  P")
 plt.ylabel("R")
 plt.show()
-
-P1 = P
-P2 = k * T**4
-
-print(P1)
-print(P2)
