@@ -58,7 +58,7 @@ e_lbd_T_0 = c_1 * np.exp(-c_2 / (lbd * T_0))
 epsilon_lbd = e_lbd_T_0 / e_lbd_T
 
 epsilon_moy = np.mean(epsilon_lbd)
-
+print(f"Valeur moyenne de epsilon_lambda :{epsilon_moy:.3f}")
 
 X = np.exp(-c_2 / (lbd * T))
 
@@ -66,13 +66,16 @@ Y = np.exp(-c_2 / (lbd * T_0))
 
 plt.plot(X, Y, "+")
 
-
 L = linregress(X, Y)
 A = L[0]
 B = L[1]
 C = L[-2]
 plt.plot(X, A * X + B)
+plt.title("e(T_0)/e(T)")
+plt.xlabel("e(T)")
+plt.ylabel("e(T_0)")
 plt.show()
+print(f"epsilon = {A:.3f}")
 
 P = R * I * I
 Ln_P = np.log(P)
@@ -82,20 +85,49 @@ L2 = linregress(Ln_T, Ln_P)
 s = L2[0]
 B2 = L2[1]
 C2 = L2[-2]
-plt.plot(Ln_T, s * Ln_T + L2[1])
+
+plt.plot(Ln_T, s * Ln_T + B2)
+
 plt.xlabel("Log(T)")
 plt.ylabel("f(Log(T))")
+print(s)
 plt.show()
 
+print(R)
 
-r_s = P ** (1 / 4)
-plt.plot(r_s, R, "+")
+# %%
+r_s = P**(1/4)
+plt.plot(r_s, R,"+")
+plt.xlabel("Racine s ième de  P")
+plt.ylabel("R")
+plt.show()
 
+# %%
 L3 = linregress(r_s, R)
+print(L3)
 alpha_a = L3[0]
 B3 = L3[1]
-Y3 = alpha_a * 0.0320e-8 * r_s + B3
+plt.plot(r_s, R,"+")
+Y3 = alpha_a  * r_s+B3
 plt.plot(r_s, Y3)
 plt.xlabel("Racine s ième de  P")
 plt.ylabel("R")
 plt.show()
+
+# %%
+# k= alpha_a / 0.0320
+# k= alpha_a / 5.64e-8
+# print(1/k)
+# %%
+L4 = linregress(np.log(Y3), np.log(R))
+print(L4)
+alpha_2 = L4[0]
+B4 = L4[1]
+plt.plot(np.log(Y3), np.log(R),"+")
+Y4 = alpha_2  * np.log(Y3)+B4
+plt.plot(np.log(Y3), Y4)
+plt.xlabel("Racine s ième de  P")
+plt.ylabel("R")
+plt.show()
+print()
+print(np.exp(B4))
