@@ -71,9 +71,9 @@ A = L[0]
 B = L[1]
 C = L[-2]
 plt.plot(X, A * X + B)
-plt.title("e(T_0)/e(T)")
 plt.xlabel("e(T)")
 plt.ylabel("e(T_0)")
+plt.title(f"a = {L[0]:.3f}, b = {L[1]:.3f}")
 plt.show()
 print(f"epsilon = {A:.3f}")
 
@@ -91,16 +91,12 @@ plt.plot(Ln_T, s * Ln_T + B2)
 plt.xlabel("Log(T)")
 plt.ylabel("f(Log(T))")
 print(s)
+plt.title(f"s = {L2[0]:.3f}, b = {L2[1]:.3f}")
 plt.show()
 
-print(R)
 
 # %%
 r_s = P**(1/4)
-plt.plot(r_s, R,"+")
-plt.xlabel("Racine s ième de  P")
-plt.ylabel("R")
-plt.show()
 
 # %%
 L3 = linregress(r_s, R)
@@ -112,22 +108,21 @@ Y3 = alpha_a  * r_s+B3
 plt.plot(r_s, Y3)
 plt.xlabel("Racine s ième de  P")
 plt.ylabel("R")
+plt.title(f"a = {L3[0]:.3f}, b = {L3[1]:.3f}")
 plt.show()
 
 # %%
-# k= alpha_a / 0.0320
-# k= alpha_a / 5.64e-8
-# print(1/k)
+
+import pandas as pd
 # %%
-L4 = linregress(np.log(Y3), np.log(R))
-print(L4)
-alpha_2 = L4[0]
-B4 = L4[1]
-plt.plot(np.log(Y3), np.log(R),"+")
-Y4 = alpha_2  * np.log(Y3)+B4
-plt.plot(np.log(Y3), Y4)
-plt.xlabel("Racine s ième de  P")
-plt.ylabel("R")
-plt.show()
-print()
-print(np.exp(B4))
+
+
+df =pd.DataFrame({'U (V)': U, 'I (A)': I, 'T_0 (K)': T_0, 'R (Ohm)': R,'rho (m^-1)': rho_T,'T (K)': T,'epsilon': e_lbd_T}, columns = ['U (V)', 'I (A)', 'T_0 (K)', 'R (Ohm)','rho (m^-1)','T (K)','epsilon'])
+#print(df)
+
+# %%
+#print(df.to_latex(index=False,float_format="{:.3e}"))
+#df.to_csv("out.csv", index=False,float_format="{:.3e}")
+
+print(epsilon_moy)
+print(np.std(epsilon_lbd))
