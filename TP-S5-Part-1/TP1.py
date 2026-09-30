@@ -126,3 +126,4 @@ df =pd.DataFrame({'U (V)': U, 'I (A)': I, 'T_0 (K)': T_0, 'R (Ohm)': R,'rho (m^-
 
 print(epsilon_moy)
 print(np.std(epsilon_lbd))
+print(L2)
